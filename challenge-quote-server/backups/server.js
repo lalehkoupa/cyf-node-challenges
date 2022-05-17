@@ -6,18 +6,24 @@ const express = require("express");
 const app = express();
 
 //load the quotes JSON
-const Quotes = require("./quotes.json");
+const quotes = require("./quotes.json");
 
 // Now register handlers for some routes:
 //   /                  - Return some helpful welcome info (text)
 //   /quotes            - Should return all quotes (json)
 //   /quotes/random     - Should return ONE quote (json)
-app.get("/", function(request, response) {
-  response.send("Neill's Quote Server!  Ask me for /quotes/random, or /quotes");
+app.get("/", function (request, response) {
+  response.send("Laleh's Quote Server!  Ask me for /quotes/random, or /quotes");
 });
 
 //START OF YOUR CODE...
+app.get("/quotes/random", function (request, response) {
+  response.send(pickFromArray(quotes));
+});
 
+app.get("/quotes", function (request, response) {
+  response.send(quotes);
+});
 //...END OF YOUR CODE
 
 //You can use this function to pick one element at random from a given array
@@ -29,6 +35,7 @@ function pickFromArray(arr) {
 }
 
 //Start our server so that it listens for HTTP requests!
-const listener = app.listen(process.env.PORT, function() {
+const listener = app.listen(process.env.PORT, function () {
   console.log("Your app is listening on port " + listener.address().port);
 });
+//app.listen(3000);
